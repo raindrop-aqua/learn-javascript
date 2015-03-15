@@ -1,2 +1,2 @@
-# learn-javascript
-Learn Javascript
+# Learn Javascript
+Javascriptを学びます。
