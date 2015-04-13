@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Aurelia Example</title>
+</head>
+<body>
+  <template>
+    <section>
+      <form role="form">
+        First Name: <input type="text" value.bind="firstName" /><br/>
+        Last Name: <input type="text" value.bind="lastName" /><br/>
+        Full Name: ${fullName}
+      </form>
+    </section>
+  </template>
+
+  <script src="js/lib/vue-0.11.5.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
