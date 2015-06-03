@@ -1,4 +1,5 @@
 var main = function () {
+  "use strict";
   var
     canvas = document.getElementById("webgl"),
     vs = document.getElementById("vs").text,
@@ -31,20 +32,19 @@ var main = function () {
   draw = function () {
     var
       len = g_points.length,
-      i, x, y;
+      i, xy;
 
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    for (i = 0; i < len; i+=2) {
-      x = g_points[i];
-      y = g_points[i + 1];
+    for (i = 0; i < len; i++) {
+      xy = g_points[i];
 
-      gl.vertexAttrib3f(a_Position, x, y, 0.0);
+      gl.vertexAttrib3f(a_Position, xy[0], xy[1], 0.0);
       gl.drawArrays(gl.POINTS, 0, 1);
     }
     return true;
-  }
+  };
 
   onclick = function (event) {
     var
@@ -55,11 +55,11 @@ var main = function () {
     x = ((x - rect.left) - canvas.height / 2) / (canvas.height / 2);
     y = ((canvas.width / 2) - (y - rect.top)) / (canvas.width / 2);
 
-    g_points.push(x);
-    g_points.push(y);
+    g_points.push([x, y]);
 
     draw();
-  }
+  };
+
   init();
   draw();
-}
+};
