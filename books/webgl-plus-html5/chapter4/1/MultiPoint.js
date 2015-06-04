@@ -1,11 +1,11 @@
-var main = function () {
+var main = (function () {
     "use strict";
     var
         canvas = document.getElementById("webgl"),
         vs = document.getElementById("vs").text,
         fs = document.getElementById("fs").text,
         gl = getWebGLContext(canvas),
-        n,
+        point_count,
         a_Position,
         init,
         draw,
@@ -22,8 +22,8 @@ var main = function () {
             return false;
         }
 
-        n = initVertexBuffers(gl);
-        if (n < 0) {
+        point_count = initVertexBuffers(gl);
+        if (point_count < 0) {
             console.log("頂点座標の設定に失敗");
             return false;
         }
@@ -37,7 +37,7 @@ var main = function () {
                 -0.5, -0.5,
                  0.5, -0.5
             ]),
-            n = 3,
+            count = 3,  // vertices count
             vertexBuffer;
 
         vertexBuffer = gl.createBuffer();
@@ -58,19 +58,23 @@ var main = function () {
 
         // a_Position変数にバッファオブジェクトを割り当てる
         gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
+        // バッファオブジェクトのバインドを解除する
+        gl.bindBuffer(gl.ARRAY_BUFFER, null);
         // a_Position変数でのバッファオブジェクトの割り当てを有効にする
         gl.enableVertexAttribArray(a_Position);
 
-        return n;
+        return count;
     };
 
     draw = function () {
         gl.clearColor(0.0, 0.0, 0.0, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT);
-        gl.drawArrays(gl.POINTS, 0, n);
+        gl.drawArrays(gl.POINTS, 0, point_count);
     };
 
-    init();
-    draw();
+    return function () {
+        init();
+        draw();
+    };
 
-};
+})();

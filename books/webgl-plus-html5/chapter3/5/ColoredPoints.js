@@ -1,4 +1,4 @@
-var main = function () {
+var main = (function () {
     "use strict";
     var
         canvas = document.getElementById("webgl"),
@@ -75,7 +75,10 @@ var main = function () {
         draw();
     };
 
-    init();
-    draw();
-};
+    return function () {
+        init();
+        draw();
+    };
+
+})();
 
