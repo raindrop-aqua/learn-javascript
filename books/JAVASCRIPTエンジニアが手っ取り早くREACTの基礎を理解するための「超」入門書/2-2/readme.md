@@ -19,7 +19,7 @@ npm i -D @babel/core babel-loader @babel/preset-env @babel/preset-react @babel/r
 ## Webpackセットアップ
 
 ```sh
-npm i -D webpack webpack-cli
+npm i -D webpack webpack-cli style-loader css-loader
 ```
 
 webpack.config.js development.js を作成する。
@@ -36,14 +36,17 @@ npm i -S react react-dom
 ./node_modules/.bin/webpack
 ```
 
-## webpack dev server のセットアップ
+## Webpack Dev Serverのセットアップ
 
 ```sh
 npm i -D webpack-dev-server html-webpack-plugin
 ```
 
-サーバー起動
+### サーバー起動
+
+サーバーが起動したら、``http://localhost:8080``でアクセス。ソースコードを修正すると、ページも自動的にリロードする。
 
 ```sh
 ./node_modules/.bin/webpack-dev-server
 ```
+

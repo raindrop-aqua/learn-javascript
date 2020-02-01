@@ -1,10 +1,8 @@
 import React from "react";
-import { render } from "react-dom";
+import ReactDOM from "react-dom";
+import "./style.css"
 
-class App extends React.Component {
-    render() {
-        return <p>Hello React!</p>
-    }
-}
-
-render(<App/>, document.getElementById("app"));
+ReactDOM.render(
+    React.createElement('h1', null, 'Hello World!'),
+    document.getElementById('main')
+);
