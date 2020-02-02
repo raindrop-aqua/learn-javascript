@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JSX</title>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.js"></script>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script type="text/babel">
+        class MyComponent extends React.Component {
+            render() {
+                return (
+                    <div>
+                        {// コメント
+                        }
+                        {
+                            /*
+                                複数行のコメント
+                            */
+                        }
+                        <p>{hoge}</p>
+                        <p>{score > 70 ? "合格" : "落第"}</p>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            React.createElement(MyComponent),
+            document.getElementById("main")
+        );
+    </script>
+</body>
+
+</html>
