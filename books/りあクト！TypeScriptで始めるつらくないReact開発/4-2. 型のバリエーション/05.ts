@@ -1,5 +1,7 @@
 // never
 
+
+// case のどれかを削除すると、check: never に値が入ることになり、コンパイルエラーとなる。
 const greet = (friend: "serval" | "caracal" | "cheetah") => {
     switch (friend) {
         case "serval":
