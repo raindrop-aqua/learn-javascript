@@ -18,3 +18,9 @@ yarn add semantic-ui-react semantic-ui-css
 ```shell script
 yarn start
 ```
+
+## 解説
+
+7-2 ではクラスコンポーネントでコーディングしたが、
+このセクションでは、関数コンポーネントを扱っている。
+対比してみること。
