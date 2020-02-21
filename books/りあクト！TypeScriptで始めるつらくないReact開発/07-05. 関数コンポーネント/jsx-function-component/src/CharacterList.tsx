@@ -14,7 +14,7 @@ interface CharacterListProps {
 }
 
 const CharacterList: FC<CharacterListProps> = ({
-  school = "公明不明",
+  school = "校名不明",
   characters
 }) => (
   <>
