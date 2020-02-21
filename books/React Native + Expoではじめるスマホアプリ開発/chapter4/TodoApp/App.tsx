@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   Button,
   FlatList,
@@ -12,21 +12,23 @@ import {
   View
 } from "react-native";
 
-const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
+const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 44 : StatusBar.currentHeight;
 
-// interface TodoItem {
-//   index: number;
-//   title: string;
-//   done: boolean;
-// }
-//
-// interface Todo {
-//   items: TodoItem[];
-//   currentIndex: number;
-//   inputText: string;
-// }
+interface TodoItem {
+  index: number;
+  title: string;
+  done: boolean;
+}
 
-export default class App extends React.Component {
+interface State {
+  todo: TodoItem[];
+  currentIndex: number;
+  inputText: string;
+}
+
+interface Props {}
+
+export default class App extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,7 +58,10 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : null}
+      >
         <View style={styles.filter}>
           <Text>Filterがここに配置されます</Text>
         </View>
@@ -77,7 +82,7 @@ export default class App extends React.Component {
             onPress={this.onAddItem}
             title="Add"
             color="#841584"
-            style={styles.inputButton}
+            accessibilityLabel="input todo"
           />
         </View>
       </KeyboardAvoidingView>
@@ -99,13 +104,13 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 30,
-    flexDirection: "row",
+    flexDirection: "row"
   },
   inputText: {
     flex: 1,
     backgroundColor: "lightblue"
   },
   inputButton: {
-    width: 200,
+    width: 100
   }
 });
