@@ -19,14 +19,14 @@ const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
 // TODOを保持するKey/Valueストアのキー
 const TODO_KEY = "@todoapp.todo";
 
-interface TodoItem {
+interface Item {
   index: number;
   title: string;
   done: boolean;
 }
 
 interface State {
-  todo: TodoItem[];
+  todo: Item[];
   currentIndex: number;
   inputText: string;
   filterText: string;
@@ -53,7 +53,7 @@ export default class App extends Component<Props, State> {
     try {
       const todoString = await AsyncStorage.getItem(TODO_KEY);
       if (todoString) {
-        const todo: TodoItem[] = JSON.parse(todoString);
+        const todo: Item[] = JSON.parse(todoString);
         const currentIndex = todo.length;
         this.setState({ todo: todo, currentIndex: currentIndex });
       }
@@ -87,6 +87,15 @@ export default class App extends Component<Props, State> {
     const _ = this.saveTodo(todo);
   };
 
+  onTapTodoItem = todoItem => {
+    const todo = this.state.todo;
+    const index = todo.indexOf(todoItem);
+    todoItem.done = !todoItem.done;
+    todo[index] = todoItem;
+    this.setState({ todo: todo });
+    const _ = this.saveTodo(todo);
+  };
+
   render() {
     // フィルタ処理
     const filterText = this.state.filterText;
@@ -110,7 +119,14 @@ export default class App extends Component<Props, State> {
         <SafeAreaView style={styles.todolist}>
           <FlatList
             data={todoFiltered}
-            renderItem={({ item }) => <Text>{item.title}</Text>}
+            extraData={this.state}
+            renderItem={({ item }) => (
+              <TodoItem
+                title={item.title}
+                done={item.done}
+                onTapTodoItem={() => this.onTapTodoItem(item)}
+              />
+            )}
             keyExtractor={(item, index) => "todo_" + index}
           />
         </SafeAreaView>
@@ -119,18 +135,30 @@ export default class App extends Component<Props, State> {
             onChangeText={text => this.setState({ inputText: text })}
             value={this.state.inputText}
             style={styles.inputText}
+            placeholder="Input your new todo"
           />
           <Button
             onPress={this.onAddItem}
             title="Add"
             color="#841584"
-            accessibilityLabel="input todo"
           />
         </View>
       </KeyboardAvoidingView>
     );
   }
 }
+
+const TodoItem = props => {
+  let textStyle = styles.todoItem;
+  if (props.done === true) {
+    textStyle = styles.todoItemDone;
+  }
+  return (
+    <TouchableOpacity onPress={props.onTapTodoItem}>
+      <Text style={textStyle}>{props.title}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -149,10 +177,19 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   inputText: {
+    fontSize: 20,
     flex: 1,
-    backgroundColor: "lightblue"
+    backgroundColor: "ghostwhite"
   },
   inputButton: {
     width: 100
+  },
+  todoItem: {
+    fontSize: 30,
+    backgroundColor: "white"
+  },
+  todoItemDone: {
+    fontSize: 30,
+    backgroundColor: "red"
   }
 });
