@@ -4,7 +4,7 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
@@ -12,7 +12,7 @@ import {
   View
 } from "react-native";
 
-const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 44 : StatusBar.currentHeight;
+const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
 
 interface TodoItem {
   index: number;
@@ -65,13 +65,13 @@ export default class App extends Component<Props, State> {
         <View style={styles.filter}>
           <Text>Filterがここに配置されます</Text>
         </View>
-        <ScrollView style={styles.todolist}>
+        <SafeAreaView style={styles.todolist}>
           <FlatList
             data={this.state.todo}
             renderItem={({ item }) => <Text>{item.title}</Text>}
             keyExtractor={(item, index) => "todo_" + index}
           />
-        </ScrollView>
+        </SafeAreaView>
         <View style={styles.input}>
           <TextInput
             onChangeText={text => this.setState({ inputText: text })}
