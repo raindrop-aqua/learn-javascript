@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
+  TouchableOpacity
 } from "react-native";
 
 // ステータスバーの高さ
@@ -28,6 +29,7 @@ interface State {
   todo: TodoItem[];
   currentIndex: number;
   inputText: string;
+  filterText: string;
 }
 
 interface Props {}
@@ -38,7 +40,8 @@ export default class App extends Component<Props, State> {
     this.state = {
       todo: [],
       currentIndex: 0,
-      inputText: ""
+      inputText: "",
+      filterText: ""
     };
   }
 
@@ -85,17 +88,28 @@ export default class App extends Component<Props, State> {
   };
 
   render() {
+    // フィルタ処理
+    const filterText = this.state.filterText;
+    let todoFiltered = this.state.todo;
+    if (filterText !== "") {
+      todoFiltered = todoFiltered.filter(t => t.title.includes(filterText));
+    }
     return (
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : null}
       >
         <View style={styles.filter}>
-          <Text>Filterがここに配置されます</Text>
+          <TextInput
+            onChangeText={text => this.setState({ filterText: text })}
+            value={this.state.filterText}
+            style={styles.inputText}
+            placeholder="Type filter text"
+          />
         </View>
         <SafeAreaView style={styles.todolist}>
           <FlatList
-            data={this.state.todo}
+            data={todoFiltered}
             renderItem={({ item }) => <Text>{item.title}</Text>}
             keyExtractor={(item, index) => "todo_" + index}
           />
