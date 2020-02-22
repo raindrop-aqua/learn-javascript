@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Todo Application (TypeScript)",
-    "slug": "TodoApp",
+    "name": "Reverse Polish Notation Calculator (TypeScript)",
+    "slug": "RPNCalc",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
