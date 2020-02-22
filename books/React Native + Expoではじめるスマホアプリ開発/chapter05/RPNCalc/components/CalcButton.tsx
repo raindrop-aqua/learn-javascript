@@ -5,7 +5,7 @@ import { Styles } from "./CalcButtonStyles";
 type CalcButtonProps = {
   flex?: number;
   label: string;
-  btnEvent: any;
+  btnEvent: () => void;
   children?: never;
 };
 
@@ -23,4 +23,23 @@ const CalcButton: FC<CalcButtonProps> = (props: CalcButtonProps) => {
   );
 };
 
-export default CalcButton;
+type CalcButtonsProps = {
+  buttons: CalcButtonProps[];
+};
+
+export const CalcButtons: FC<CalcButtonsProps> = (props: CalcButtonsProps) => {
+  return (
+    <React.Fragment>
+      {props.buttons.map(button => {
+        return (
+          <CalcButton
+            key={button.label}
+            flex={button.flex}
+            label={button.label}
+            btnEvent={button.btnEvent}
+          />
+        );
+      })}
+    </React.Fragment>
+  );
+};
