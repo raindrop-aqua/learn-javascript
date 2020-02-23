@@ -17,7 +17,8 @@ export const Styles = StyleSheet.create({
     flex: 1,
     borderBottomWidth: 1,
     justifyContent: "center",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
+    paddingRight: 20
   },
   buttons: {
     flex: 5
