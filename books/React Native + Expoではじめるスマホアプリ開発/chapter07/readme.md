@@ -22,8 +22,15 @@ yarn add react-native-iphone-x-helper
 
 ## Redux 設定
 ```shell script
-yarn add redux react-redux @types/redux @types/react-redux
+yarn add redux react-redux 
+yarn add -D @types/redux @types/react-redux
 ```
+## 永続化ライブラリ設定
+```shell script
+yarn add redux-persist
+yarn add -D @types/redux-persist
+```
+
 
 
 ## アプリケーションの開始
