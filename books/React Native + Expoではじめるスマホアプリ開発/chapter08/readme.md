@@ -19,6 +19,12 @@ yarn add react-native-maps
 yarn add @types/react-native-maps
 ```
 
+## turf.js の利用
+
+```shell script
+yarn add @turf/destination
+```
+
 ## アプリケーションの開始
 
 以下コマンドで Expo 管理画面が起動する。
