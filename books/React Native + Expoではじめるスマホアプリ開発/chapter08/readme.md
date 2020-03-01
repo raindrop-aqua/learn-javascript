@@ -19,10 +19,16 @@ yarn add react-native-maps
 yarn add @types/react-native-maps
 ```
 
-## turf.js の利用
+## turf.js の利用(地図に関するライブラリ)
 
 ```shell script
 yarn add @turf/destination
+```
+
+## 画面遷移を行うので、react-navigation ライブラリを設定
+
+```shell script
+yarn add react-navigation
 ```
 
 ## アプリケーションの開始
@@ -33,3 +39,7 @@ yarn add @turf/destination
 # ios
 yarn start
 ```
+
+## てづまり
+
+途中でエラーが出て動かなくなってしまった。一旦中断します。
