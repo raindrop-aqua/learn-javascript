@@ -46,6 +46,6 @@ npx webpack --config webpack.config.js
 ```
 
 ``` 
-# モードを指定してコンパイルを行う
+# モードを指定してコンパイルを行う(development or production)
 npx webpack --mode development
 ```
