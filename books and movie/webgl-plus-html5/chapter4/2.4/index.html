@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script id="vs" type="x-shader/x-vertex">
+    attribute vec4 a_Position;
+    void main() {
+      gl_Position = a_Position;
+    }
+  </script>
+  <script id="fs" type="x-shader/x-fragment">
+    void main() {
+      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    }
+  </script>
+</head>
+<body onload="main()">
+  <canvas id="webgl" width="400" height="400">
+    Canvasをサポートしたブラウザを使用してください
+  </canvas>
+
+  <script src="../../lib/webgl-utils.js"></script>
+  <script src="../../lib/webgl-debug.js"></script>
+  <script src="../../lib/cuon-utils.js"></script>
+  <script src="HelloQuad.js"></script>
+</body>
+</html>
