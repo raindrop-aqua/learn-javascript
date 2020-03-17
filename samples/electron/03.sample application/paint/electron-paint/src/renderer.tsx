@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { Layer, Stage, Text } from "react-konva";
+import { Layer, Rect, Stage, Text } from "react-konva";
 
 class App extends Component {
   render() {
@@ -8,6 +8,15 @@ class App extends Component {
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
           <Text text="Hello React and Konva" />
+          <Rect
+            x={20}
+            y={50}
+            width={100}
+            height={100}
+            fill="red"
+            shadowBlur={10}
+            draggable
+          />
         </Layer>
       </Stage>
     );

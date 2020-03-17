@@ -34,7 +34,8 @@ var App = /** @class */ (function (_super) {
     App.prototype.render = function () {
         return (react_1.default.createElement(react_konva_1.Stage, { width: window.innerWidth, height: window.innerHeight },
             react_1.default.createElement(react_konva_1.Layer, null,
-                react_1.default.createElement(react_konva_1.Text, { text: "Hello React and Konva" }))));
+                react_1.default.createElement(react_konva_1.Text, { text: "Hello React and Konva" }),
+                react_1.default.createElement(react_konva_1.Rect, { x: 20, y: 50, width: 100, height: 100, fill: "red", shadowBlur: 10, draggable: true }))));
     };
     return App;
 }(react_1.Component));
