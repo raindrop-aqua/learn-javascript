@@ -1,0 +1,23 @@
+{
+  "name": "react-data-grid",
+  "version": "1.0.0",
+  "description": "### アプリケーション作成",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "react": "^16.13.0",
+    "react-data-grid": "^7.0.0-alpha.29",
+    "react-dom": "^16.13.0",
+    "realm": "^5.0.0"
+  },
+  "devDependencies": {
+    "electron": "^8.1.1"
+  }
+}
