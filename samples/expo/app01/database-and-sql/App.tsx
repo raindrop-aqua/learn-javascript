@@ -1,43 +1,87 @@
-import * as React from "react";
-import "normalize.css";
-import "@blueprintjs/core/lib/css/blueprint.css";
-import "@blueprintjs/icons/lib/css/blueprint-icons.css";
-import "@blueprintjs/table/lib/css/table.css";
-import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/theme-github";
-import { Alignment, Button, Navbar } from "@blueprintjs/core";
-import { Cell, Column, Table } from "@blueprintjs/table";
+import React, { Component } from "react";
+import {
+  Container,
+  Header,
+  Left,
+  Body,
+  Right,
+  Button,
+  Icon,
+  Title,
+  FooterTab,
+  Footer,
+  Text,
+  Content,
+  Badge,
+  Input,
+  Item,
+  Form,
+  Picker
+} from "native-base";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
+import { AppLoading } from "expo";
 
-const onchange = (newValue: string) => {
-  console.log("change", newValue);
+type AppProps = {};
+type AppState = {
+  isReady: boolean;
 };
 
-const cellRenderer = (rowIndex: number) => {
-  return <Cell>{`$${(rowIndex * 10).toFixed(2)}`}</Cell>;
-};
+export default class App extends Component<AppProps, AppState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false
+    };
+  }
 
-const App = () => (
-  <div>
-    <Navbar>
-      <Navbar.Group align={Alignment.LEFT}>
-        <Navbar.Heading>Blueprint</Navbar.Heading>
-        <Navbar.Divider />
-        <Button className="bp3-minimal" icon="home" text="Home" />
-        <Button className="bp3-minimal" icon="document" text="Files" />
-      </Navbar.Group>
-    </Navbar>
-    <AceEditor
-      mode="javascript"
-      theme="github"
-      onChange={onchange}
-      name="UNIQUE_ID_OF_DIV"
-      editorProps={{ $blockScrolling: true }}
-    />
-    <Table numRows={10}>
-      <Column name="Dollars" cellRenderer={cellRenderer} />
-    </Table>
-  </div>
-);
-
-export default App;
+  render() {
+    return (
+      <Container>
+        <Header>
+          <Left>
+            <Title>タイトル</Title>
+          </Left>
+          <Body>
+            <Title>タイトル</Title>
+          </Body>
+          <Right>
+            <Title>タイトル</Title>
+          </Right>
+        </Header>
+        <Content>
+          <Form>
+            <Item>
+              <Input placeholder="Username" />
+            </Item>
+            <Item last>
+              <Input placeholder="Password" />
+            </Item>
+          </Form>
+        </Content>
+        <Footer>
+          <FooterTab>
+            <Button badge vertical>
+              <Badge>
+                <Text>2</Text>
+              </Badge>
+              <Text>Apps</Text>
+            </Button>
+            <Button vertical>
+              <Text>Camera</Text>
+            </Button>
+            <Button active badge vertical>
+              <Badge>
+                <Text>51</Text>
+              </Badge>
+              <Text>Navigate</Text>
+            </Button>
+            <Button vertical>
+              <Text>Contact</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
+    );
+  }
+}
