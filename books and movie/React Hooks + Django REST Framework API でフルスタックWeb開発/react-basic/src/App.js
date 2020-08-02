@@ -6,11 +6,15 @@ import BasicHooksUseState3 from "./components/BasicHooksUseState3";
 import BasicHooksUseState4 from "./components/BasicHooksUseState4";
 import BasicHooksUseEffect1 from "./components/BasicHooksUseEffect1";
 import BasicHooksUseEffect2 from "./components/BasicHooksUseEffect2";
-import TimerContainer from "./components/TimerContainer";
+import BasicHooksUseEffect3 from "./components/BasicHooksUseEffect3";
+import ApiFetch from "./components/ApiFetch";
+import AppContext from "./contexts/AppContext";
+import BasicHooksUseContextChild from "./components/BasicHooksUseContextChild";
+import BasicHooksUseReducer from "./components/BasicHooksUseReducer";
 
 const App = () => {
   return (
-    <>
+    <AppContext.Provider value={"Value from App.js"}>
       basic react - props
       <Basic1 name="Hooks" />
       <hr />
@@ -34,8 +38,17 @@ const App = () => {
       <BasicHooksUseEffect2 />
       <hr />
       basic hooks - useEffect - cleanup
-      <TimerContainer />
-    </>
+      <BasicHooksUseEffect3 />
+      <hr />
+      basic hooks - API Fetch
+      <ApiFetch />
+      <hr />
+      basic hooks - useContext
+      <BasicHooksUseContextChild />
+      <hr />
+      basic hooks - useReducer
+      <BasicHooksUseReducer />
+    </AppContext.Provider>
   );
 };
 

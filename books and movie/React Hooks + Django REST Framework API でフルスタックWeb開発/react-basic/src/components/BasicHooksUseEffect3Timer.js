@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Timer = () => {
+const BasicHooksUseEffect3Timer = () => {
   const [count, setCount] = useState(0);
   const time = () => {
     setCount((prevCount) => prevCount + 1);
@@ -10,11 +10,11 @@ const Timer = () => {
     const interval = setInterval(time, 1000);
     return () => {
       clearInterval(interval);
-      console.log("Timer cleared.");
+      console.log("BasicHooksUseEffect3Timer cleared.");
     };
   }, []);
 
   return <div>{count}</div>;
 };
 
-export default Timer;
+export default BasicHooksUseEffect3Timer;
