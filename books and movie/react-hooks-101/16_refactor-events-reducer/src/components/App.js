@@ -10,7 +10,6 @@ const App = () => {
   const initialState = {
     events: [],
   };
-
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
