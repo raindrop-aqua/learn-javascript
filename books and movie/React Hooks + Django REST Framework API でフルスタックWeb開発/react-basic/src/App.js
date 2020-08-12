@@ -11,6 +11,7 @@ import ApiFetch from "./components/ApiFetch";
 import AppContext from "./contexts/AppContext";
 import BasicHooksUseContextChild from "./components/BasicHooksUseContextChild";
 import BasicHooksUseReducer from "./components/BasicHooksUseReducer";
+import BasicHooksUseReducerAndUseContextChild from "./components/BasicHooksUseReducerAndUseContextChild";
 
 const App = () => {
   return (
@@ -48,6 +49,9 @@ const App = () => {
       <hr />
       basic hooks - useReducer
       <BasicHooksUseReducer />
+      <hr />
+      basic hooks - useReducer and useContext
+      <BasicHooksUseReducerAndUseContextChild />
     </AppContext.Provider>
   );
 };
