@@ -7,6 +7,10 @@ const jwt = require("jsonwebtoken");
 //JSON Serverで、利用するJSONファイルを設定
 const server = jsonServer.create();
 const router = jsonServer.router("./data/task.json");
+const middlewares = jsonServer.defaults({
+  noCors: false,
+});
+server.use(middlewares);
 
 //JSONリクエスト対応
 server.use(bodyParser.urlencoded({ extended: true }));
