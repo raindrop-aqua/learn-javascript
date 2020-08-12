@@ -18,6 +18,8 @@ $ node index.js
 
 POSTMANなどを利用して、サーバーに対してリクエストを行う。
 
+![POST](./images/auth.png)
+
 | method |url | request content type |
 |:---|:---|:---|
 | POST | http://localhost3000/auth/ | application/json |
@@ -39,8 +41,11 @@ POSTMANなどを利用して、サーバーに対してリクエストを行う�
 
 ## API呼び出し
 
-request header に 以下の設定しつつ呼び出し
+request header に 以下の設定しつつ呼び出し。
+postman などを利用してもOK
+![post](./images/post.png)
 
+リクエストヘッダに以下のトークンを設定すること
 ```
 Authorization: Token XXXXXXXXXXXXXXXX
 ```

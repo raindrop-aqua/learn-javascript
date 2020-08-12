@@ -80,7 +80,7 @@ server.use(/^(?!\/auth).*$/, async (req, res, next) => {
 
 //認証機能付きのREST APIサーバ起動
 server.use(router);
-server.listen(3000, () => {
+server.listen(8000, () => {
   console.log("Run Auth API Server");
-  console.log("http://localhost:3000/");
+  console.log("http://localhost:8000/");
 });
