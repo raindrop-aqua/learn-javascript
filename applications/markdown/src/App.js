@@ -2,8 +2,16 @@ import React, { useState } from "react";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import marked from "marked";
+import highlight from "highlightjs";
+import "highlightjs/styles/docco.css";
 
-function App() {
+marked.setOptions({
+  highlight: function (code, lang) {
+    return highlight.highlightAuto(code, [lang.split(":")[0]]).value;
+  },
+});
+
+const App = () => {
   const [markdown, setMarkdown] = useState("");
   const toolbar = [
     {
@@ -52,6 +60,6 @@ function App() {
       </div>
     </>
   );
-}
+};
 
 export default App;
