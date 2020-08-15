@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
+import marked from "marked";
 
 function App() {
   const [markdown, setMarkdown] = useState("");
@@ -40,11 +41,16 @@ function App() {
   };
 
   return (
-    <SimpleMDE
-      onChange={(e) => setMarkdown(e)}
-      options={{ toolbar: toolbar }}
-      events={{ drop: handleDrop }}
-    />
+    <>
+      <SimpleMDE
+        onChange={(e) => setMarkdown(e)}
+        options={{ toolbar: toolbar }}
+        events={{ drop: handleDrop }}
+      />
+      <div id="body">
+        <span dangerouslySetInnerHTML={{ __html: marked(markdown) }} />
+      </div>
+    </>
   );
 }
 
