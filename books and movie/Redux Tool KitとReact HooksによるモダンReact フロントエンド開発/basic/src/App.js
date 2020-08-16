@@ -2,6 +2,7 @@ import React from "react";
 import { Counter } from "./features/counter/Counter";
 import { TaskList } from "./features/task/TaskList";
 import { TaskInput } from "./features/task/TaskInput";
+import { Fetch } from "./features/fetch/Fetch";
 
 function App() {
   return (
@@ -14,6 +15,10 @@ function App() {
 
       <TaskInput />
       <TaskList />
+
+      <hr />
+      <h2>Fetch features</h2>
+      <Fetch />
     </div>
   );
 }
