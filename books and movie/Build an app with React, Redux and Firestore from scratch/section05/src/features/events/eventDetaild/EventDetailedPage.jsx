@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function EventDetailedPage() {
-  return <div>Event Detailed Page</div>;
+  return <h1>Event Detailed Page</h1>;
 }
