@@ -6,6 +6,7 @@ import { Segment, Header, Button, FormField, Label } from "semantic-ui-react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { updateEvent, createEvent } from "../eventActions";
+import MyTextInput from "../../../app/common/form/MyTextInput";
 
 export default function EventForm({ match, history }) {
   const dispatch = useDispatch();
@@ -50,13 +51,7 @@ export default function EventForm({ match, history }) {
         onSubmit={(values) => console.log(values)}
       >
         <Form className='ui form'>
-          <FormField>
-            <Field name='title' placeholder='Event title' />
-            <ErrorMessage
-              name='title'
-              render={(error) => <Label pointing color='red' content={error} />}
-            />
-          </FormField>
+          <MyTextInput name='title' placeholder='Event title' />
           <FormField>
             <Field name='category' placeholder='Category' />
           </FormField>
