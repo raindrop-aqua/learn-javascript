@@ -6,7 +6,7 @@ export default function SignedInMenu({ signOut }) {
   return (
     <Menu.Item position='right'>
       <Image avatar spaced='right' src='/assets/user.png' />
-      <Dropdown pointing='top left' text='Bob'>
+      <Dropdown pointing='top right' text='Bob'>
         <Dropdown.Menu>
           <Dropdown.Item
             as={Link}
