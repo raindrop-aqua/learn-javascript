@@ -16,13 +16,19 @@ export function loadEvents() {
     dispatch(asyncActionStart());
     try {
       const events = await fetchSampleData();
-      console.log(events);
       dispatch({ type: FETCH_EVENTS, payload: events });
       dispatch(asyncActionFinish());
     } catch (error) {
       console.log(error);
       dispatch(asyncActionError(error));
     }
+  };
+}
+
+export function listenToEvents(events) {
+  return {
+    type: FETCH_EVENTS,
+    payload: events,
   };
 }
 
