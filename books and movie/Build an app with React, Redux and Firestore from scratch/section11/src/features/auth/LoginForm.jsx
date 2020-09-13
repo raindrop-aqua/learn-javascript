@@ -5,8 +5,8 @@ import * as Yup from "yup";
 import ModalWrapper from "../../app/common/modals/ModalWrapper";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { useDispatch } from "react-redux";
-import { signInUser } from "./authAction";
 import { closeModal } from "../../app/common/modals/modalReducer";
+import { signInWithEmail } from "../../app/firestore/firebaseService";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -14,16 +14,21 @@ export default function LoginForm() {
   return (
     <ModalWrapper size='mini' header='Sign in to Re-vents'>
       <Formik
-        onSubmit={(values, { setSubmitting }) => {
-          dispatch(signInUser(values));
-          setSubmitting(false);
-          dispatch(closeModal());
-        }}
         initialValues={{ email: "", password: "" }}
         validationSchema={Yup.object({
           email: Yup.string().required().email(),
           password: Yup.string().required(),
         })}
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            await signInWithEmail(values);
+            setSubmitting(false);
+            dispatch(closeModal());
+          } catch (error) {
+            setSubmitting(false);
+            console.log(error);
+          }
+        }}
       >
         {({ isSubmitting, dirty, isValid }) => (
           <Form className='ui form'>
