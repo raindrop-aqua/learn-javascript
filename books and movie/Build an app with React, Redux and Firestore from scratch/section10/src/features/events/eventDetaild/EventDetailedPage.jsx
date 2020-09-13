@@ -1,15 +1,31 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Grid } from "semantic-ui-react";
 import EventDetailedHeader from "./EventDetailedHeader";
 import EventDetailedInfo from "./EventDetailedInfo";
 import EventDetailedChat from "./EventDetailedChat";
 import EventDetailedSidebar from "./EventDetailedSidebar";
-import { useSelector } from "react-redux";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
+import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc";
+import { listenToEventFromFirestore } from "../../../app/firestore/firestoreService";
+import { listenToEvents } from "../eventActions";
 
 export default function EventDetailedPage({ match }) {
+  const dispatch = useDispatch();
   const event = useSelector((state) =>
     state.event.events.find((e) => e.id === match.params.id)
   );
+  const { loading } = useSelector((state) => state.async);
+
+  useFirestoreDoc({
+    query: () => listenToEventFromFirestore(match.params.id),
+    data: (evt) => dispatch(listenToEvents([evt])),
+    deps: [match.params.id, dispatch],
+  });
+
+  if (loading || !event) {
+    return <LoadingComponent content='Loading event... ' />;
+  }
 
   return (
     <Grid>
