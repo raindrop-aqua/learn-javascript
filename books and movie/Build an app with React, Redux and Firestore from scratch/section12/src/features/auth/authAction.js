@@ -1,6 +1,6 @@
 import { SIGN_IN_USER, SIGN_OUT_USER } from "./authConstants";
 import firebase from "../../app/config/firebase";
-import { APP_LOADED } from "../../app/async/asyncReducer";
+import { appInitialize } from "../../app/async/asyncReducer";
 
 export function signInUser(user) {
   return {
@@ -17,7 +17,7 @@ export function verifyAuth() {
       } else {
         dispatch(signOutUser());
       }
-      dispatch({ type: APP_LOADED });
+      dispatch(appInitialize());
     });
   };
 }
