@@ -10,8 +10,9 @@ import EventDetailedPage from "../../features/events/eventDetaild/EventDetailedP
 import EventForm from "../../features/events/eventForm/EventForm";
 import Sandbox from "../../features/sandbox/Sandbox";
 import ModalManager from "../common/modals/ModalManager";
-import ErrorComponent from "../common/errors/ErrorComponent";
 import AccountPage from "../../features/auth/AccountPage";
+import ProfilePage from "../../features/profiles/profilePage/ProfilePage";
+import ErrorComponent from "../common/errors/ErrorComponent";
 import LoadingComponent from "./LoadingComponent";
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
                 key={key}
               />
               <Route path='/account' component={AccountPage} />
+              <Route path='/profile/:id' component={ProfilePage} />
               <Route path='/error' component={ErrorComponent} />
             </Container>
           </>
