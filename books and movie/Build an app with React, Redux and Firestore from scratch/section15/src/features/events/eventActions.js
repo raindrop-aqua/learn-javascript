@@ -3,6 +3,8 @@ import {
   UPDATE_EVENT,
   DELETE_EVENT,
   FETCH_EVENTS,
+  LISTEN_TO_EVENT_CHAT,
+  CLEAR_COMMENTS,
 } from "./eventConstants";
 import {
   asyncActionStart,
@@ -50,5 +52,18 @@ export function deleteEvent(eventId) {
   return {
     type: DELETE_EVENT,
     payload: eventId,
+  };
+}
+
+export function listenToEventChat(comments) {
+  return {
+    type: LISTEN_TO_EVENT_CHAT,
+    payload: comments,
+  };
+}
+
+export function clearComments() {
+  return {
+    type: CLEAR_COMMENTS,
   };
 }
