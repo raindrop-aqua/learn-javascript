@@ -42,7 +42,7 @@ export function listenToFollowers(followers) {
   };
 }
 
-export function listenToFollowings(followings) {
+export function listenToFollowing(followings) {
   return {
     type: LISTEN_TO_FOLLOWINGS,
     payload: followings,

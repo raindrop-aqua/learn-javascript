@@ -13,7 +13,7 @@ const initialState = {
   photos: [],
   profileEvents: [],
   followers: [],
-  followings: [],
+  following: [],
 };
 
 export default function profileReducer(
@@ -49,7 +49,7 @@ export default function profileReducer(
     case LISTEN_TO_FOLLOWINGS:
       return {
         ...state,
-        followings: payload,
+        following: payload,
       };
     default:
       return state;
