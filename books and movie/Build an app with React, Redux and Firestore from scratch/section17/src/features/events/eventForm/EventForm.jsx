@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Segment, Header, Button, Confirm } from "semantic-ui-react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { listenToEvents } from "../eventActions";
+import { listenToSelectedEvents } from "../eventActions";
 import { categoryData } from "../../../app/api/categoryOptions";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import MyTextArea from "../../../app/common/form/MyTextArea";
@@ -24,9 +24,7 @@ export default function EventForm({ match, history }) {
   const dispatch = useDispatch();
   const [loadingCancel, setLoadingCancel] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const selectedEvent = useSelector((state) =>
-    state.event.events.find((e) => e.id === match.params.id)
-  );
+  const { selectedEvent } = useSelector((state) => state.event);
   const { loading, error } = useSelector((state) => state.async);
 
   const initialValues = selectedEvent ?? {
@@ -63,7 +61,7 @@ export default function EventForm({ match, history }) {
   useFirestoreDoc({
     shouldExecute: !!match.params.id,
     query: () => listenToEventFromFirestore(match.params.id),
-    data: (evt) => dispatch(listenToEvents([evt])),
+    data: (evt) => dispatch(listenToSelectedEvents(evt)),
     deps: [match.params.id, dispatch],
   });
 

@@ -5,6 +5,8 @@ import {
   FETCH_EVENTS,
   LISTEN_TO_EVENT_CHAT,
   CLEAR_COMMENTS,
+  LISTEN_TO_SELECTED_EVENT,
+  CLEAR_EVENTS,
 } from "./eventConstants";
 import {
   asyncActionStart,
@@ -37,10 +39,10 @@ export function fetchEvents(predicate, limit, lastDocSnapshot) {
   };
 }
 
-export function listenToEvents(events) {
+export function listenToSelectedEvents(selectedEvent) {
   return {
-    type: FETCH_EVENTS,
-    payload: events,
+    type: LISTEN_TO_SELECTED_EVENT,
+    payload: selectedEvent,
   };
 }
 
@@ -75,5 +77,11 @@ export function listenToEventChat(comments) {
 export function clearComments() {
   return {
     type: CLEAR_COMMENTS,
+  };
+}
+
+export function clearEvents() {
+  return {
+    type: CLEAR_EVENTS,
   };
 }
