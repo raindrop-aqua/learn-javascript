@@ -9,7 +9,7 @@ import EventsFeed from "./EventsFeed";
 import { RETAIN_STATE } from "../eventConstants";
 
 export default function EventDashboard() {
-  const limit = 2;
+  const limit = 10;
   const dispatch = useDispatch();
   const {
     events,
