@@ -4,47 +4,40 @@ import { Grid, Loader } from "semantic-ui-react";
 import EventList from "./EventList";
 import EventListItemPlaceholder from "./EventListItemPlaceholder";
 import EventFilters from "./EventFilters";
-import { clearEvents, fetchEvents } from "../eventActions";
+import { fetchEvents } from "../eventActions";
 import EventsFeed from "./EventsFeed";
+import { RETAIN_STATE } from "../eventConstants";
 
 export default function EventDashboard() {
-  const limit = 5;
+  const limit = 2;
   const dispatch = useDispatch();
-  const { events, moreEvents } = useSelector((state) => state.event);
+  const {
+    events,
+    moreEvents,
+    filter,
+    startDate,
+    lastVisible,
+    retainState,
+  } = useSelector((state) => state.event);
   const { loading } = useSelector((state) => state.async);
   const { authenticated } = useSelector((state) => state.auth);
-  const [lastDocSnapshot, setLastDocSnapshot] = useState(null);
   const [loadingInitial, setLoadingInitial] = useState(false);
-  const [predicate, setPredicate] = useState(
-    new Map([
-      ["startDate", new Date()],
-      ["filter", "all"],
-    ])
-  );
-
-  function handleSetPredicate(key, value) {
-    dispatch(clearEvents());
-    setLastDocSnapshot(null);
-    setPredicate(new Map(predicate.set(key, value)));
-  }
 
   useEffect(() => {
+    if (retainState) {
+      return;
+    }
     setLoadingInitial(true);
-    dispatch(fetchEvents(predicate, limit)).then((lastVisible) => {
-      setLastDocSnapshot(lastVisible);
+    dispatch(fetchEvents(filter, startDate, limit)).then(() => {
       setLoadingInitial(false);
     });
     return () => {
-      dispatch(clearEvents());
+      dispatch({ type: RETAIN_STATE });
     };
-  }, [dispatch, predicate]);
+  }, [dispatch, filter, startDate, retainState]);
 
   function handleFetchNextEvents() {
-    dispatch(fetchEvents(predicate, limit, lastDocSnapshot)).then(
-      (lastVisible) => {
-        setLastDocSnapshot(lastVisible);
-      }
-    );
+    dispatch(fetchEvents(filter, startDate, limit, lastVisible));
   }
 
   return (
@@ -67,11 +60,7 @@ export default function EventDashboard() {
       <Grid.Column width={6}>
         {authenticated && <EventsFeed />}
 
-        <EventFilters
-          predicate={predicate}
-          setPredicate={handleSetPredicate}
-          loading={loading}
-        />
+        <EventFilters loading={loading} />
       </Grid.Column>
       <Grid.Column width={10}>
         <Loader active={loading} />
