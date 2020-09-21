@@ -18,6 +18,7 @@ service cloud.firestore {
     	allow read, list;
       allow update: if isHost();
       allow update: if isSignedIn() && updateAttendeeFieldsOnly();
+      allow create: if isSignedIn()
     }
 	}
 }

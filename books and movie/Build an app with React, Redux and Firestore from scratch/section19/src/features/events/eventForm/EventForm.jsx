@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Segment, Header, Button, Confirm } from "semantic-ui-react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { listenToSelectedEvents } from "../eventActions";
+import { clearSelectedEvent, listenToSelectedEvents } from "../eventActions";
 import { categoryData } from "../../../app/api/categoryOptions";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import MyTextArea from "../../../app/common/form/MyTextArea";
@@ -20,12 +20,19 @@ import {
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
 
-export default function EventForm({ match, history }) {
+export default function EventForm({ match, history, location }) {
   const dispatch = useDispatch();
   const [loadingCancel, setLoadingCancel] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const { selectedEvent } = useSelector((state) => state.event);
   const { loading, error } = useSelector((state) => state.async);
+
+  useEffect(() => {
+    if (location.pathname !== "/createEvent") {
+      return;
+    }
+    dispatch(clearSelectedEvent());
+  }, [dispatch, location.pathname]);
 
   const initialValues = selectedEvent ?? {
     title: "",
@@ -59,7 +66,9 @@ export default function EventForm({ match, history }) {
   }
 
   useFirestoreDoc({
-    shouldExecute: !!match.params.id,
+    shouldExecute:
+      match.params.id !== selectedEvent?.id &&
+      location.pathname !== "/createEvent",
     query: () => listenToEventFromFirestore(match.params.id),
     data: (evt) => dispatch(listenToSelectedEvents(evt)),
     deps: [match.params.id, dispatch],
@@ -76,6 +85,7 @@ export default function EventForm({ match, history }) {
   return (
     <Segment clearing>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
@@ -111,6 +121,7 @@ export default function EventForm({ match, history }) {
               showTimeSelect
               timeCaption='time'
               dateFormat='MMMM d, yyyy h:mm a'
+              autoComplete='off'
             />
             {selectedEvent && (
               <Button
