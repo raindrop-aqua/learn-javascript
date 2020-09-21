@@ -1,15 +1,31 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Divider, Modal } from "semantic-ui-react";
 import { openModal } from "../../app/common/modals/modalReducer";
 
-export default function UnauthModel({ history }) {
+export default function UnauthModel({ history, setModalOpen }) {
   const [open, setOpen] = useState(true);
+  const { prevLocation } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   function handleClose() {
-    history.goBack();
+    if (!history) {
+      setOpen(false);
+      setModalOpen(false);
+      return;
+    }
+    if (history && prevLocation) {
+      history.push(prevLocation.pathname);
+    } else {
+      history.push("/events");
+    }
     setOpen(false);
+  }
+
+  function handleOpenLoginModal(modalType) {
+    dispatch(openModal({ modalType }));
+    setOpen(false);
+    setModalOpen(false);
   }
 
   return (
@@ -22,14 +38,14 @@ export default function UnauthModel({ history }) {
             fluid
             color='teal'
             content='Login'
-            onClick={() => dispatch(openModal({ modalType: "LoginForm" }))}
+            onClick={() => handleOpenLoginModal("LoginForm")}
           />
           <Button.Or />
           <Button
             fluid
             color='green'
             content='Register'
-            onClick={() => dispatch(openModal({ modalType: "RegisterForm" }))}
+            onClick={() => handleOpenLoginModal("RegisterForm")}
           />
         </Button.Group>
         <Divider />
